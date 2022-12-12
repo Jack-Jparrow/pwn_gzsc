@@ -1,7 +1,7 @@
 '''
 Author: 白银
 Date: 2022-11-27 21:40:24
-LastEditTime: 2022-12-12 19:21:16
+LastEditTime: 2022-12-12 19:22:58
 LastEditors: 白银
 Description: 源码没直接写system的  gcc question_5.c -fno-stack-protector -no-pie -o question_5_x64  https://www.bilibili.com/video/BV1mr4y1Y7fW?t=5261.4&p=20
 Attention: 在哪编译的，就用哪里的libc文件反编译
