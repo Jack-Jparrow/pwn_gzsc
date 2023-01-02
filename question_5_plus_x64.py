@@ -1,6 +1,15 @@
 '''
 Author: 白银
 Date: 2022-12-16 18:36:47
+LastEditTime: 2023-01-02 13:47:31
+LastEditors: 白银
+Description: 
+Attention: 
+FilePath: /pwn/question_5_plus_x64.py
+'''
+'''
+Author: 白银
+Date: 2022-12-16 18:36:47
 LastEditTime: 2023-01-01 16:15:23
 LastEditors: 白银
 Description: gcc question_5_plus.c -fno-stack-protector -no-pie -o question_5_plus_x64  https://www.bilibili.com/video/BV1mr4y1Y7fW?t=803.0&p=22
